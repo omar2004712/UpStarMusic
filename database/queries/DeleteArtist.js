@@ -1,4 +1,4 @@
-const Artist = require('../models/artist');
+const Artist = require("../models/artist");
 
 /**
  * Deletes a single artist from the Artists collection
@@ -6,4 +6,5 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves when the record is deleted
  */
 module.exports = (_id) => {
+  return Artist.findByIdAndRemove(_id);
 };
