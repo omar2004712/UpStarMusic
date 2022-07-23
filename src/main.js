@@ -22,10 +22,11 @@ const App = () => {
 };
 
 const db = new Db("upstar_music", new Server("localhost", 27017));
-db.openUri().then(() => {
-  //used openUri instead of open due to deprectation
+db.open().then(() => {
   window.db = db;
-  mongoose.connect("mongodb://localhost/upstar_music");
+  mongoose.connect("mongodb://localhost/upstar_music", {
+    useMongoClient: true,
+  });
   mongoose.connection
     .once("open", () => {
       ReactDOM.render(<App />, document.getElementById("root"));
