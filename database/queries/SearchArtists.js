@@ -14,14 +14,16 @@ module.exports = (criteria, sortProperty, offset = 0, limit = 20) => {
     .skip(offset)
     .limit(limit);
 
-  return Promise.all([query, Artist.count()]).then((result) => {
-    return {
-      all: result[0],
-      count: result[1],
-      offset,
-      limit,
-    };
-  });
+  return Promise.all([query, Artist.find(buildQuery(criteria)).count()]).then(
+    (result) => {
+      return {
+        all: result[0],
+        count: result[1],
+        offset,
+        limit,
+      };
+    }
+  );
 };
 
 const buildQuery = (criteria) => {
